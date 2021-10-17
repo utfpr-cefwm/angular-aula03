@@ -1,4 +1,6 @@
 <form
+  (ngSubmit)="salvar()"
+  [formGroup]="formGroup"
 >
 
   <label for="titulo">
@@ -7,6 +9,7 @@
   <br />
   <input
     pInputText
+    formControlName="titulo"
     id="titulo"
     type="text"
   />
@@ -21,6 +24,7 @@
   <input
     pInputText
     id="descricao"
+    formControlName="descricao"
     type="text"
   />
 
@@ -34,6 +38,7 @@
   <input
     pInputText
     id="imagem"
+    formControlName="imagem"
     type="text"
   />
 
@@ -47,6 +52,7 @@
   <input
     pInputText
     id="url"
+    formControlName="url"
     type="text"
   />
 
