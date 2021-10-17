@@ -6,7 +6,13 @@ import {
   Routes,
 } from '@angular/router';
 
+import { ArtigoComponent } from './components/artigo/artigo.component';
+
 const routes: Routes = [
+  {
+    path: ':id',
+    component: ArtigoComponent,
+  },
 ];
 
 @NgModule({
