@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -17,12 +17,13 @@ import {
 export class ListaArtigosService {
 
   constructor(
+    @Inject('API_BASE_URL') private apiBaseUrl: string,
     private httpClient: HttpClient,
   ) {
   }
 
   public getAll(): Observable<Artigo[]> {
-    return this.httpClient.get<IArtigo[]>(`http://localhost:3333/api/artigos`).pipe(
+    return this.httpClient.get<IArtigo[]>(`${this.apiBaseUrl}/artigos`).pipe(
       map((iArtigos: IArtigo[]) => {
         return iArtigos.map((iArtigo: IArtigo) => new Artigo(
           iArtigo._id,
