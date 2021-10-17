@@ -3,6 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'artigaria-artigo',
@@ -20,11 +21,15 @@ export class ArtigoComponent implements OnInit {
   });
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      const artigoId: number = +params.id;
+    });
   }
 
   public salvar(): void {
