@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     {
       label: 'Artigos',
       icon: 'pi pi-home',
-      routerLink: [ '/home' ],
+      routerLink: [ '/home/lista-artigos' ],
     },
   ];
 
