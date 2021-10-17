@@ -7,11 +7,13 @@ import { MenubarModule } from 'primeng/menubar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { ListaArtigosComponent } from './components/lista-artigos/lista-artigos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ListaArtigosComponent,
   ],
   imports: [
     BrowserModule,
