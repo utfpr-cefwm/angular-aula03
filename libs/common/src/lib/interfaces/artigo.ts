@@ -1,4 +1,4 @@
-export interface Artigo {
+export interface IArtigo {
 
   _id: number;
 
