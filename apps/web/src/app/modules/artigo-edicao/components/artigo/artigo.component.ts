@@ -4,7 +4,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import {
@@ -15,6 +15,7 @@ import {
 import { Artigo, IArtigo } from '@artigaria/common';
 
 import { ArtigoEdicaoService } from '../../services/artigo-edicao/artigo-edicao.service';
+import { ModifyResult } from 'mongodb';
 
 @Component({
   selector: 'artigaria-artigo',
@@ -34,6 +35,7 @@ export class ArtigoComponent implements OnInit, OnDestroy {
   private subUnsubscribe: Subject<void> = new Subject();
 
   constructor(
+    private router: Router,
     private artigoEdicaoService: ArtigoEdicaoService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -60,7 +62,13 @@ export class ArtigoComponent implements OnInit, OnDestroy {
 
   public salvar(): void {
     const iArtigo: IArtigo = this.formGroup.value;
-    this.artigoEdicaoService.put(iArtigo);
+    this.artigoEdicaoService.put(iArtigo).subscribe(
+      (results: ModifyResult<IArtigo>) => {
+        if (results.ok) {
+          this.router.navigate(['/']);
+        }
+      },
+    );
   }
 
 }

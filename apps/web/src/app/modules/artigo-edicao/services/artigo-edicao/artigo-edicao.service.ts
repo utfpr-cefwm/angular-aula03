@@ -7,6 +7,8 @@ import {
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
+import { ModifyResult } from 'mongodb';
+
 import {
   Artigo,
   IArtigo,
@@ -41,13 +43,13 @@ export class ArtigoEdicaoService {
    *
    * @param iArtigo Dados do artigo a serem salvos no banco de dados.
    */
-  public put(iArtigo: IArtigo): void {
-    this.httpClient.put<unknown>(
+  public put(iArtigo: IArtigo): Observable<ModifyResult<IArtigo>> {
+    return this.httpClient.put<ModifyResult<IArtigo>>(
       `${this.apiBaseUrl}/artigos/${iArtigo._id}`,
       iArtigo,
     ).pipe(
       take(1),
-    ).subscribe(results => console.log(results));
+    );
   }
 
 }
