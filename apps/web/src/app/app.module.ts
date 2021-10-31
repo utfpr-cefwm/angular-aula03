@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,8 +28,10 @@ import { ListaArtigosComponent } from './components/lista-artigos/lista-artigos.
     MenubarModule,
     CardModule,
     ButtonModule,
+    ToastModule,
   ],
   providers: [
+    MessageService,
     {
       provide: 'API_BASE_URL',
       useValue: 'http://localhost:3333/api',
