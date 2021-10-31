@@ -7,11 +7,13 @@ import { ButtonModule } from 'primeng/button';
 
 import { ArtigoEdicaoRoutingModule } from './artigo-edicao-routing.module';
 import { ArtigoComponent } from './components/artigo/artigo.component';
+import { SrcDebounceDirective } from './directives/src-debounce/src-debounce.directive';
 
 
 @NgModule({
   declarations: [
     ArtigoComponent,
+    SrcDebounceDirective,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { ArtigoComponent } from './components/artigo/artigo.component';
   ],
   exports: [
     ArtigoComponent,
+    SrcDebounceDirective,
   ],
 })
 export class ArtigoEdicaoModule {
