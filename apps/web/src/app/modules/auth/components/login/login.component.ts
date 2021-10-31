@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
     senha: ['', Validators.required],
   });
 
+  public carregando = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -47,10 +49,12 @@ export class LoginComponent implements OnInit {
   }
 
   public fazerLogin(): void {
+    this.carregando = true;
     const body: Pick<IUsuario, 'login' | 'senha'> = this.formGroup.value;
     this.authService.login(body).pipe(
       take(1),
       catchError((err: HttpErrorResponse) => {
+        this.carregando = false;
         if (err.status === 401) {
           this.messageService.add({
             severity: 'warn',
@@ -61,6 +65,7 @@ export class LoginComponent implements OnInit {
         throw err;
       }),
     ).subscribe((result?: AuthResult) => {
+      this.carregando = false;
       if (result?.jwt) {
         this.messageService.add({
           severity: 'success',

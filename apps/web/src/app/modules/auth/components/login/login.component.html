@@ -38,11 +38,12 @@
 
       <button
         pButton
-        [disabled]="formGroup.invalid"
+        [disabled]="carregando || formGroup.invalid"
         icon="pi pi-sign-in"
         label="Fazer login"
         type="submit"
         class="p-button-primary"
+        [loading]="carregando"
       >
       </button>
 
