@@ -13,6 +13,7 @@ import { json } from 'body-parser';
 
 import { authRouter } from './app/routes/auth';
 import { artigosRouter } from './app/routes/artigos';
+import { requireJwtToken } from './app/middlewares/jwt';
 
 MongoClient.connect(
   'mongodb://angular-aula03_devcontainer_db_1:27017',
@@ -36,7 +37,8 @@ app.get('/api', (req, res) => {
 // Cria o endpoint de autenticação (login):
 app.use('/api/auth', authRouter);
 
-app.use('/api/artigos', artigosRouter);
+// Exibe que o token JWT esteja presente ao acessar a rota a seguir:
+app.use('/api/artigos', requireJwtToken, artigosRouter);
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
