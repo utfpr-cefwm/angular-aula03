@@ -12,7 +12,7 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 
-import { Artigo } from '@artigaria/common';
+import { Artigo, IArtigo } from '@artigaria/common';
 
 import { ArtigoEdicaoService } from '../../services/artigo-edicao/artigo-edicao.service';
 
@@ -59,7 +59,8 @@ export class ArtigoComponent implements OnInit, OnDestroy {
   }
 
   public salvar(): void {
-    console.log(this.formGroup.value);
+    const iArtigo: IArtigo = this.formGroup.value;
+    this.artigoEdicaoService.put(iArtigo);
   }
 
 }

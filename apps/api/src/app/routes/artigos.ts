@@ -31,3 +31,15 @@ artigosRouter.get('/:_id', async (req: Request, res: Response, next: NextFunctio
   });
   res.json(artigo);
 });
+
+artigosRouter.put('/:_id', async (req: Request, res: Response, next: NextFunction) => {
+  const _id: number = +req.params._id;
+  const body: IArtigo = req.body;
+  const results = await getCollection<IArtigo>(
+    req.app,
+    'artigos',
+  ).findOneAndReplace({
+    _id: _id,
+  }, body);
+  res.json(results);
+});

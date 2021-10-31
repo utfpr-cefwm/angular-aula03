@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import {
   Artigo,
@@ -34,6 +34,20 @@ export class ArtigoEdicaoService {
         return Artigo.fromJson(iArtigo);
       }),
     );
+  }
+
+  /**
+   * Salva no banco de dados o artigo especificado.
+   *
+   * @param iArtigo Dados do artigo a serem salvos no banco de dados.
+   */
+  public put(iArtigo: IArtigo): void {
+    this.httpClient.put<unknown>(
+      `${this.apiBaseUrl}/artigos/${iArtigo._id}`,
+      iArtigo,
+    ).pipe(
+      take(1),
+    ).subscribe(results => console.log(results));
   }
 
 }
