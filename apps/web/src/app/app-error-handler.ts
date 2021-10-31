@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorHandler, Injectable, NgZone } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { MessageService } from "primeng/api";
 
@@ -7,6 +8,7 @@ import { MessageService } from "primeng/api";
 export class AppErrorHandler extends ErrorHandler {
 
   constructor(
+    private router: Router,
     private ngZone: NgZone,
     private messageService: MessageService,
   ) {
@@ -34,6 +36,9 @@ export class AppErrorHandler extends ErrorHandler {
           severity: 'warn',
           summary: `Usuário não autenticado`,
           detail: 'Redirecionando para a página de login...',
+        });
+        this.router.navigate(['/login'], {
+          skipLocationChange: true,
         });
         return;
       }
