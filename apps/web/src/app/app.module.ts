@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListaArtigosComponent } from './components/lista-artigos/lista-artigos.component';
 import { AppErrorHandler } from './app-error-handler';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AppErrorHandler } from './app-error-handler';
     CardModule,
     ButtonModule,
     ToastModule,
+    AuthModule,
   ],
   providers: [
     MessageService,
