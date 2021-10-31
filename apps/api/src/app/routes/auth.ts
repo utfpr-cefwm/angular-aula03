@@ -6,6 +6,7 @@ import {
 } from "express";
 
 import {
+  AuthResult,
   IUsuario,
 } from '@artigaria/common';
 
@@ -37,7 +38,7 @@ authRouter.post('/login', async (req: Request, res: Response, next: NextFunction
     res.json({
       jwt: criarToken(usuario),
       usuario: sanitizeUsuario(usuario),
-    });
+    } as AuthResult);
   } else {
     res.status(401);
     next(new Error('Login ou senha errados'));
