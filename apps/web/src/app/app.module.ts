@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListaArtigosComponent } from './components/lista-artigos/lista-artigos.component';
+import { AppErrorHandler } from './app-error-handler';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,10 @@ import { ListaArtigosComponent } from './components/lista-artigos/lista-artigos.
     {
       provide: 'API_BASE_URL',
       useValue: 'http://localhost:3333/api',
+    },
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler,
     },
   ],
   bootstrap: [
