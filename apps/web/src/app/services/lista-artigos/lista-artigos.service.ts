@@ -25,13 +25,7 @@ export class ListaArtigosService {
   public getAll(): Observable<Artigo[]> {
     return this.httpClient.get<IArtigo[]>(`${this.apiBaseUrl}/artigos`).pipe(
       map((iArtigos: IArtigo[]) => {
-        return iArtigos.map((iArtigo: IArtigo) => new Artigo(
-          iArtigo._id,
-          iArtigo.imagem,
-          iArtigo.titulo,
-          iArtigo.descricao,
-          iArtigo.url,
-        ));
+        return iArtigos.map((iArtigo: IArtigo) => Artigo.fromJson(iArtigo));
       }),
     );
   }

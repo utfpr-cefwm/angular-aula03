@@ -7,7 +7,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {
+  take,
+  takeUntil,
+} from 'rxjs/operators';
+
+import { Artigo } from '@artigaria/common';
+
+import { ArtigoEdicaoService } from '../../services/artigo-edicao/artigo-edicao.service';
 
 @Component({
   selector: 'artigaria-artigo',
@@ -27,6 +34,7 @@ export class ArtigoComponent implements OnInit, OnDestroy {
   private subUnsubscribe: Subject<void> = new Subject();
 
   constructor(
+    private artigoEdicaoService: ArtigoEdicaoService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
   ) {
@@ -37,6 +45,11 @@ export class ArtigoComponent implements OnInit, OnDestroy {
       takeUntil(this.subUnsubscribe),
     ).subscribe((params: Params) => {
       const artigoId: number = +params.id;
+      this.artigoEdicaoService.get(artigoId).pipe(
+        take(1),
+      ).subscribe((artigo: Artigo) => {
+        this.formGroup.setValue(artigo.asJson());
+      });
     });
   }
 
