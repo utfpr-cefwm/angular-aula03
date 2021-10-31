@@ -11,6 +11,7 @@ import * as cors from 'cors';
 
 import { json } from 'body-parser';
 
+import { authRouter } from './app/routes/auth';
 import { artigosRouter } from './app/routes/artigos';
 
 MongoClient.connect(
@@ -31,6 +32,9 @@ app.use(json());
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to api!' });
 });
+
+// Cria o endpoint de autenticação (login):
+app.use('/api/auth', authRouter);
 
 app.use('/api/artigos', artigosRouter);
 
